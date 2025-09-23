@@ -1,0 +1,103 @@
+/* HEADER / NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #141414;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo {
+    font-family: 'Anton', sans-serif;
+    font-size: 2rem;
+    color: #e50914; /* rouge type Netflix */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .nav-links li {
+    list-style: none;
+  }
+  
+  .nav-links li a:hover {
+    color: #e50914;
+  }
+  
+  /* HERO SECTION */
+  .hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 70vh;
+    background: url('../assets/images/hero.jpg') center/cover no-repeat;
+    position: relative;
+  }
+  
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.5); /* overlay sombre */
+  }
+  
+  .hero-content {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .hero h1 {
+    font-size: clamp(1.8rem, 6vw, 3rem);
+    margin-bottom: 10px;
+  }
+  
+  .hero p {
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    margin-bottom: 20px;
+  }
+  
+  /* GRID DE FILMS */
+  .movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    padding: 20px;
+  }
+  
+  .movie-card {
+    background-color: #222;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+  }
+  
+  .movie-card img {
+    width: 100%;
+    display: block;
+  }
+  
+  .movie-card h3 {
+    padding: 10px 0;
+  }
+  
+  .movie-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  }
+  
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #141414;
+    color: #888;
+    font-size: 0.9rem;
+  }

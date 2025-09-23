@@ -1,0 +1,9 @@
+/* Animations simples */
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+  
+  .hero-content, .movie-card {
+    animation: fadeIn 1s ease forwards;
+  }
