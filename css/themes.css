@@ -1,14 +1,18 @@
+
 :root {
-    --bg-color: #141414;
-    --text-color: #fff;
     --primary-color: #e50914;
+    --secondary-color: #141414;
+    --background-color: #000000;
+    --text-color: #ffffff;
+    --muted-color: #aaaaaa;
   }
   
-  body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
+  
+  /* Transition fluide entre thèmes */
+  body, .site-header, .card, .modal-panel {
+    transition: background-color 0.4s, color 0.4s, border-color 0.4s;
   }
   
-  button {
-    background-color: var(--primary-color);
+  .logo, .btn, .nav-item, .nav-indicator {
+    transition: color 0.4s, background-color 0.4s;
   }

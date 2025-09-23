@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StreamFlix</title>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>StreamFlix - Prototype</title>
+
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Anton&display=swap" rel="stylesheet">
+
+
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/themes.css">
@@ -12,52 +16,84 @@
 </head>
 <body>
 
-  <!-- HEADER / NAVIGATION -->
-  <header>
-    <nav class="navbar">
-      <div class="logo">StreamFlix</div>
-      <ul class="nav-links">
-        <li><a href="#">Accueil</a></li>
-        <li><a href="#">Films</a></li>
-        <li><a href="#">Séries</a></li>
-        <li><a href="#">Ma liste</a></li>
-      </ul>
-    </nav>
+
+  <header id="siteHeader" class="site-header" role="banner">
+    <div class="header-inner container">
+      <div class="brand" aria-hidden="false">
+        <div class="logo">STREAMFLIX</div>
+      </div>
+
+      <nav class="main-nav" aria-label="Navigation principale">
+        <ul class="nav-list">
+          <li data-section="home" class="nav-item active">Accueil</li>
+          <li data-section="nouvelles" class="nav-item">Nouveautés</li>
+          <li data-section="tendances" class="nav-item">Tendances</li>
+          <li data-section="pourvous" class="nav-item">Pour vous</li>
+        </ul>
+        <div class="nav-indicator" aria-hidden="true"></div>
+      </nav>
+
+      <div class="header-controls">
+        <div class="search-box">
+          <input id="searchInput" type="search" placeholder="Rechercher un titre..." aria-label="Rechercher" />
+        </div>
+
+
+        <div class="color-picker-wrapper" title="Couleur secondaire">
+          <input type="color" id="colorPicker" value="#e50914" aria-label="Couleur secondaire">
+        </div>
+
+        <button class="btn ghost">S'abonner</button>
+        <div class="profile"><img src="https://www.gravatar.com/avatar/?d=mp&s=80" alt="Profil"></div>
+      </div>
+    </div>
   </header>
 
-  <!-- HERO SECTION -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Découvrez les nouveautés</h1>
-      <p>Les meilleurs films et séries, disponibles maintenant.</p>
-      <button>Regarder maintenant</button>
+  <section class="hero" id="hero" role="region" aria-label="Section principale">
+    <div class="hero-layer layer-back" data-speed="0.12" aria-hidden="true"></div>
+    <div class="hero-layer layer-mid" data-speed="0.22" aria-hidden="true"></div>
+    <div class="hero-layer layer-front" data-speed="0.4" aria-hidden="true"></div>
+
+    <div class="hero-content container">
+      <h1>Les meilleures séries et films, réunis.</h1>
+      <p>Découvre des sélections personnalisées et des nouveautés chaque semaine.</p>
+      <div class="hero-actions">
+        <button class="btn primary">Regarder maintenant</button>
+        <button class="btn outline">Ajouter à ma liste</button>
+      </div>
     </div>
   </section>
 
-  <!-- GRID DE FILMS -->
-  <section class="movie-grid">
-    <div class="movie-card">
-      <img src="assets/images/film1.jpg" alt="Film 1">
-      <h3>Film 1</h3>
-    </div>
-    <div class="movie-card">
-      <img src="assets/images/film2.jpg" alt="Film 2">
-      <h3>Film 2</h3>
-    </div>
-    <div class="movie-card">
-      <img src="assets/images/film3.jpg" alt="Film 3">
-      <h3>Film 3</h3>
-    </div>
-    <div class="movie-card">
-      <img src="assets/images/film4.jpg" alt="Film 4">
-      <h3>Film 4</h3>
-    </div>
-  </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>© StreamFlix - Tous droits réservés</p>
+  <main id="mainContent" class="main" role="main">
+    <section id="rowsContainer" class="rows container" aria-live="polite"></section>
+  </main>
+  
+  <div id="modal" class="modal hide" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-panel">
+      <button class="modal-close" aria-label="Fermer">✕</button>
+      <div class="modal-body"></div>
+    </div>
+  </div>
+
+
+  <div id="modal" class="modal hide" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-panel">
+      <button class="modal-close" aria-label="Fermer">✕</button>
+      <div class="modal-body">
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© StreamFlix by Hamza</p>
+    </div>
   </footer>
 
+
+  <script src="main.js" defer></script>
 </body>
 </html>

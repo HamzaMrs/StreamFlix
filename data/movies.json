@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1,
+    "title": "The Dark Knight",
+    "description": "Batman doit affronter le Joker pour sauver Gotham City.",
+    "category": "tendances",
+    "poster": "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Interstellar",
+    "description": "Une mission spatiale pour sauver l'humanité.",
+    "category": "nouveautes",
+    "poster": "https://image.tmdb.org/t/p/w500/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Parasite",
+    "description": "Une famille pauvre s'immisce dans la vie d'une famille riche.",
+    "category": "pourvous",
+    "poster": "https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Joker",
+    "description": "L'ascension chaotique d'Arthur Fleck dans Gotham.",
+    "category": "nouveautes",
+    "poster": "https://image.tmdb.org/t/p/w500/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg"
+  },
+  {
+    "id": 5,
+    "title": "Avengers: Endgame",
+    "description": "Les super-héros tentent de réparer les conséquences du Snap.",
+    "category": "tendances",
+    "poster": "https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg"
+  },
+  {
+    "id": 6,
+    "title": "The Matrix",
+    "description": "Un hacker découvre que la réalité n'est qu'une simulation.",
+    "category": "pourvous",
+    "poster": "https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg"
+  },
+  {
+    "id": 7,
+    "title": "The Lion King",
+    "description": "Un jeune lion doit reprendre son royaume.",
+    "category": "nouveautes",
+    "poster": "https://image.tmdb.org/t/p/w500/2bXbqYdUdNVa8VIWXVfclP2ICtT.jpg"
+  },
+  {
+    "id": 8,
+    "title": "Fight Club",
+    "description": "Deux hommes créent un club de combat clandestin.",
+    "category": "tendances",
+    "poster": "https://image.tmdb.org/t/p/w500/bptfVGEQuv6vDTIMVCHjJ9Dz8PX.jpg"
+  },
+  {
+    "id": 9,
+    "title": "La La Land",
+    "description": "Deux artistes tentent de réaliser leurs rêves à Los Angeles.",
+    "category": "pourvous",
+    "poster": "https://image.tmdb.org/t/p/w500/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg"
+  },
+  {
+    "id": 10,
+    "title": "Inception",
+    "description": "Des voleurs utilisent les rêves pour infiltrer l'esprit.",
+    "category": "tendances",
+    "poster": "https://image.tmdb.org/t/p/w500/edv5CZvWj09upOsy2Y6IwDhK8bt.jpg"
+  },
+  {
+    "id": 11,
+    "title": "Dune",
+    "description": "L'épopée de Paul Atréides sur la planète Arrakis.",
+    "category": "nouveautes",
+    "poster": "https://image.tmdb.org/t/p/w500/d5NXSklXo0qyIYkgV94XAgMIckC.jpg"
+  },
+  {
+    "id": 12,
+    "title": "The Godfather",
+    "description": "L'histoire de la famille mafieuse Corleone.",
+    "category": "pourvous",
+    "poster": "https://image.tmdb.org/t/p/w500/eEslKSwcqmiNS6va24Pbxf2UKmJ.jpg"
+  },
+  {
+    "id": 13,
+    "title": "Black Panther",
+    "description": "Le roi T’Challa protège Wakanda et le monde.",
+    "category": "pourvous",
+    "poster": "https://image.tmdb.org/t/p/w500/uxzzxijgPIY7slzFvMotPv8wjKA.jpg"
+  },
+  {
+    "id": 14,
+    "title": "Doctor Strange",
+    "description": "Un chirurgien découvre les arts mystiques.",
+    "category": "nouveautes",
+    "poster": "https://image.tmdb.org/t/p/w500/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg"
+  },
+  {
+    "id": 15,
+    "title": "Iron Man",
+    "description": "Tony Stark devient le super-héros Iron Man.",
+    "category": "tendances",
+    "poster": "https://image.tmdb.org/t/p/w500/78lPtwv72eTNqFW9COBYI0dWDJa.jpg"
+  },
+  {
+    "id": 16,
+    "title": "The Shawshank Redemption",
+    "description": "Deux hommes se lient d'amitié en prison.",
+    "category": "pourvous",
+    "poster": "https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg"
+  },
+  {
+    "id": 17,
+    "title": "Frozen II",
+    "description": "Elsa et Anna explorent un mystère ancien.",
+    "category": "nouveautes",
+    "poster": "https://image.tmdb.org/t/p/w500/pjeMs3yqRmFL3giJy4PMXWZTTPa.jpg"
+  },
+  {
+    "id": 18,
+    "title": "The Avengers",
+    "description": "Les héros se réunissent pour sauver le monde.",
+    "category": "tendances",
+    "poster": "https://image.tmdb.org/t/p/w500/RYMX2wcKCBAr24UyPD7xwmjaTn.jpg"
+  },
+  {
+    "id": 19,
+    "title": "Coco",
+    "description": "Un jeune garçon explore le monde des morts.",
+    "category": "pourvous",
+    "poster": "https://image.tmdb.org/t/p/w500/eKi8dIrr8voobbaGzDpe8w0PVbC.jpg"
+  },
+  {
+    "id": 20,
+    "title": "La La Land (2)",
+    "description": "Deux artistes tentent de réaliser leurs rêves à Los Angeles.",
+    "category": "pourvous",
+    "poster": "https://image.tmdb.org/t/p/w500/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg"
+  }
+]
