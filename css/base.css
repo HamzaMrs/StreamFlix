@@ -11,9 +11,14 @@
   --transition-speed: 0.3s;
   --container-width: 95%;
   --max-width: 1400px;
+
+
+  --font-size-base: 16px;
+  --font-size-small: 14px;
+  --font-size-large: 18px;
 }
 
-/* Reset + box-sizing */
+
 *,
 *::before,
 *::after {
@@ -24,7 +29,7 @@
 
 /* HTML + body */
 html {
-  font-size: 16px;
+  font-size: var(--font-size-base);
   scroll-behavior: smooth;
 }
 
@@ -35,6 +40,43 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+}
+
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  :root {
+    --font-size-base: var(--font-size-small);
+  }
+
+  body {
+    line-height: 1.4;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --font-size-base: var(--font-size-small);
+    --container-width: 90%;
+  }
+
+  body {
+    font-size: var(--font-size-small);
+  }
+
+  a {
+    font-size: var(--font-size-small);
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --font-size-base: var(--font-size-large);
+  }
+
+  body {
+    font-size: var(--font-size-large);
+  }
 }
 
 /* Liens */

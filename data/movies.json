@@ -17,7 +17,7 @@
     "id": 3,
     "title": "Parasite",
     "description": "Une famille pauvre s'immisce dans la vie d'une famille riche.",
-    "category": "pourvous",
+    "category": "pour vous",
     "poster": "https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg"
   },
   {
@@ -38,7 +38,7 @@
     "id": 6,
     "title": "The Matrix",
     "description": "Un hacker découvre que la réalité n'est qu'une simulation.",
-    "category": "pourvous",
+    "category": "pour vous",
     "poster": "https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg"
   },
   {
@@ -59,7 +59,7 @@
     "id": 9,
     "title": "La La Land",
     "description": "Deux artistes tentent de réaliser leurs rêves à Los Angeles.",
-    "category": "pourvous",
+    "category": "pour vous",
     "poster": "https://image.tmdb.org/t/p/w500/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg"
   },
   {
@@ -80,14 +80,14 @@
     "id": 12,
     "title": "The Godfather",
     "description": "L'histoire de la famille mafieuse Corleone.",
-    "category": "pourvous",
+    "category": "pour vous",
     "poster": "https://image.tmdb.org/t/p/w500/eEslKSwcqmiNS6va24Pbxf2UKmJ.jpg"
   },
   {
     "id": 13,
     "title": "Black Panther",
     "description": "Le roi T’Challa protège Wakanda et le monde.",
-    "category": "pourvous",
+    "category": "pour vous",
     "poster": "https://image.tmdb.org/t/p/w500/uxzzxijgPIY7slzFvMotPv8wjKA.jpg"
   },
   {
@@ -108,7 +108,7 @@
     "id": 16,
     "title": "The Shawshank Redemption",
     "description": "Deux hommes se lient d'amitié en prison.",
-    "category": "pourvous",
+    "category": "pour vous",
     "poster": "https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg"
   },
   {
@@ -129,14 +129,14 @@
     "id": 19,
     "title": "Coco",
     "description": "Un jeune garçon explore le monde des morts.",
-    "category": "pourvous",
+    "category": "pour vous",
     "poster": "https://image.tmdb.org/t/p/w500/eKi8dIrr8voobbaGzDpe8w0PVbC.jpg"
   },
   {
     "id": 20,
     "title": "La La Land (2)",
     "description": "Deux artistes tentent de réaliser leurs rêves à Los Angeles.",
-    "category": "pourvous",
+    "category": "pour vous",
     "poster": "https://image.tmdb.org/t/p/w500/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg"
   }
 ]

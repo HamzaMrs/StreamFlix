@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .catch(err => console.error("Erreur fetch JSON:", err));
   
     function renderRows() {
-      const categories = ["nouveautes", "tendances", "pourvous"];
+      const categories = ["nouveautes", "tendances", "pour vous"];
       rowsContainer.innerHTML = "";
   
       categories.forEach(cat => {
@@ -94,3 +94,11 @@ document.addEventListener("DOMContentLoaded", () => {
       else header.classList.remove("shrink");
     });
   });
+
+  const hamburger = document.querySelector('.hamburger');
+const mainNav = document.querySelector('.main-nav');
+hamburger.addEventListener('click', () => {
+  mainNav.classList.toggle('active');
+});
+
+
