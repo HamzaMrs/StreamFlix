@@ -69,10 +69,23 @@ a:hover {
   color: var(--primary-color);
 }
 
+/* Focus visible (accessibilité) */
+:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--primary-color) 70%, transparent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
 /* Images */
 img {
   max-width: 100%;
   display: block;
+}
+
+/* Sélection de texte */
+::selection {
+  background: color-mix(in srgb, var(--primary-color) 40%, #ffffff);
+  color: #000;
 }
 
 /* Conteneur global */
@@ -109,6 +122,10 @@ h1, h2, h3, h4 {
   transform: translateY(-2px);
 }
 
+.btn:active {
+  transform: translateY(0);
+}
+
 .btn.outline {
   background: transparent;
   border: 2px solid var(--primary-color);
@@ -136,7 +153,7 @@ input[type="search"] {
   background: #222;
   border: none;
   padding: 0.5rem 1rem;
-  border-radius: 2px;
+  border-radius: 10px;
   color: var(--text-color);
 }
 
@@ -144,7 +161,40 @@ input[type="search"]:focus {
   outline: 2px solid var(--primary-color);
 }
 
-/* Input color -> cercle */
+/* Scrollbars modernes (WebKit + Firefox) */
+* {
+  scrollbar-color: #333 #111;
+  scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #111;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 10px;
+  border: 2px solid #111;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
+
+/* Réduction d’animation pour accessibilité */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 #colorPicker {
   -webkit-appearance: none;
   -moz-appearance: none;

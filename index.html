@@ -36,6 +36,7 @@
                     <li data-section="nouveautes" class="nav-item">Nouveautés</li>
                     <li data-section="tendances" class="nav-item">Tendances</li>
                     <li data-section="pour-vous" class="nav-item">Pour vous</li>
+                    <li data-section="ma-liste" class="nav-item">Ma liste</li>
                 </ul>
                 <div class="nav-indicator" aria-hidden="true"></div>
             </nav>
@@ -79,13 +80,22 @@
         <section id="rowsContainer" class="rows container" aria-live="polite"></section>
     </main>
 
-    <div id="modal" class="modal hide" role="dialog" aria-modal="true" aria-hidden="true">
+    <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
         <div class="modal-backdrop"></div>
         <div class="modal-panel">
             <button class="modal-close" aria-label="Fermer">✕</button>
-            <div class="modal-body"></div>
+            <div class="modal-body">
+                <h2></h2>
+                <img src="" alt="">
+                <p></p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn primary">Regarder maintenant</button>
+                <button class="btn secondary">Ajouter à ma liste</button>
+            </div>
         </div>
     </div>
+    
 
 
     <footer class="site-footer">

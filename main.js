@@ -9,19 +9,47 @@ document.addEventListener("DOMContentLoaded", async () => {
   const colorPicker = document.getElementById("colorPicker");
   const hamburger = document.querySelector('.hamburger');
   const mainNav = document.querySelector('.main-nav');
+  const searchInput = document.getElementById("searchInput");
+  const modalActions = document.querySelector('.modal-actions');
 
   const API_KEY = 'e4b90327227c88daac14c0bd0c1f93cd';
   const BASE_URL = 'https://api.themoviedb.org/3';
   const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
+  
+  // Cache des genres
+  let genresCache = null;
 
   const categories = [
       { id: "nouveautes", endpoint: "/movie/now_playing" },
       { id: "tendances", endpoint: "/trending/movie/week" },
-      { id: "pour-vous", endpoint: "/movie/popular" }
+      { id: "pour-vous", endpoint: "/movie/popular" },
+      { id: "ma-liste", endpoint: null }
   ];
 
+  // Gestion favoris (localStorage)
+  const FAVORITES_KEY = 'sf_favorites_v1';
+  function getFavorites() {
+    try { return JSON.parse(localStorage.getItem(FAVORITES_KEY)) || []; } catch { return []; }
+  }
+  function setFavorites(favs) {
+    localStorage.setItem(FAVORITES_KEY, JSON.stringify(favs));
+  }
+  function isFavorite(id) {
+    const favs = getFavorites();
+    return favs.some(m => m.id === id);
+  }
+  function toggleFavorite(movie) {
+    const favs = getFavorites();
+    const exists = favs.some(m => m.id === movie.id);
+    const next = exists ? favs.filter(m => m.id !== movie.id) : [...favs, movie];
+    setFavorites(next);
+  }
+
   // Hamburger menu
-  hamburger.addEventListener('click', () => mainNav.classList.toggle('active'));
+  hamburger.addEventListener('click', () => {
+    mainNav.classList.toggle('active');
+    hamburger.classList.toggle('active');
+  });
 
   // Couleur primaire
   if (colorPicker) {
@@ -64,15 +92,65 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  // Hero slider
+  // Récupérer les genres
+  async function fetchGenres() {
+    if (genresCache) return genresCache;
+    try {
+      const res = await fetch(`${BASE_URL}/genre/movie/list?api_key=${API_KEY}&language=fr-FR`);
+      const data = await res.json();
+      genresCache = data.genres;
+      return genresCache;
+    } catch (err) {
+      console.error(err);
+      return [];
+    }
+  }
+
+  // Récupérer détails complets d'un film
+  async function fetchMovieDetails(movieId) {
+    try {
+      const res = await fetch(`${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=fr-FR`);
+      return await res.json();
+    } catch (err) {
+      console.error(err);
+      return null;
+    }
+  }
+
+  // Récupérer vidéos d'un film
+  async function fetchMovieVideos(movieId) {
+    try {
+      const res = await fetch(`${BASE_URL}/movie/${movieId}/videos?api_key=${API_KEY}&language=fr-FR`);
+      const data = await res.json();
+      return data.results;
+    } catch (err) {
+      console.error(err);
+      return [];
+    }
+  }
+
+  // Hero slider avec images
   async function renderHeroSlider() {
     const movies = await fetchMovies("/movie/popular");
-    movies.slice(0, 10).forEach(movie => {
+    const slides = movies.slice(0, 6).map(movie => {
       const img = document.createElement("img");
       img.src = `${IMAGE_BASE_URL}${movie.backdrop_path}`;
       img.alt = movie.title;
+      return img;
+    });
+    slides.forEach((img, idx) => {
+      if (idx === 0) img.classList.add('active');
       heroSlider.appendChild(img);
     });
+
+    let current = 0;
+    setInterval(() => {
+      const imgs = heroSlider.querySelectorAll('img');
+      if (imgs.length <= 1) return;
+      imgs[current].classList.remove('active');
+      current = (current + 1) % imgs.length;
+      imgs[current].classList.add('active');
+    }, 4000);
   }
   await renderHeroSlider();
 
@@ -91,11 +169,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       const cards = document.createElement("div");
       cards.classList.add("row-track");
 
-      const movies = await fetchMovies(category.endpoint);
+      const movies = category.endpoint ? await fetchMovies(category.endpoint) : getFavorites();
       movies.forEach((movie, i) => {
         const card = document.createElement("div");
         card.classList.add("card", "staggered");
         card.style.animationDelay = `${i * 0.08}s`;
+        card.dataset.title = (movie.title || "").toLowerCase();
         card.innerHTML = `
           <img src="${IMAGE_BASE_URL}${movie.poster_path}" alt="${movie.title}">
           <div class="card-info">
@@ -111,17 +190,114 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  function showModal(movie) {
+  // Modal enrichie
+  async function showModal(movie) {
+    const [details, genres] = await Promise.all([
+      fetchMovieDetails(movie.id),
+      fetchGenres()
+    ]);
+    
+    const genreNames = movie.genre_ids ? 
+      movie.genre_ids.map(id => genres.find(g => g.id === id)?.name).filter(Boolean).join(', ') : '';
+    
+    const runtime = details?.runtime ? `${Math.floor(details.runtime / 60)}h ${details.runtime % 60}min` : '';
+    
     modalBody.innerHTML = `
-      <h2>${movie.title}</h2>
-      <img src="${IMAGE_BASE_URL}${movie.poster_path}" alt="${movie.title}" style="width:100%; border-radius:5px; margin-bottom:1rem;">
-      <p>${movie.overview}</p>
+        <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+        <div class="modal-body-content">
+          <h2>${movie.title}</h2>
+          <div class="modal-meta">
+            <span class="badge">Film</span>
+            ${movie.release_date ? `<span class="badge">${String(movie.release_date).slice(0,4)}</span>` : ''}
+            ${runtime ? `<span class="badge">${runtime}</span>` : ''}
+            ${movie.vote_average ? `<span class="badge">★ ${Math.round(movie.vote_average * 10) / 10}</span>` : ''}
+          </div>
+          ${genreNames ? `<p class="genres"><strong>Genres:</strong> ${genreNames}</p>` : ''}
+          <p>${movie.overview || 'Aucune description disponible.'}</p>
+        </div>
     `;
-    modal.classList.remove("hide");
-  }
+    // Boutons actions
+    const actions = modal.querySelector('.modal-actions');
+    actions.innerHTML = '';
+    const watchBtn = document.createElement('button');
+    watchBtn.className = 'btn primary';
+    watchBtn.textContent = 'Regarder maintenant';
+    const favBtn = document.createElement('button');
+    favBtn.className = 'btn secondary';
+    function syncFavBtn() {
+      favBtn.textContent = isFavorite(movie.id) ? 'Retirer de ma liste' : 'Ajouter à ma liste';
+    }
+    syncFavBtn();
+    favBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleFavorite({ id: movie.id, title: movie.title, poster_path: movie.poster_path, overview: movie.overview });
+      syncFavBtn();
+      // Rafraîchir la rangée Ma liste si ouverte
+      const myListRow = document.getElementById('ma-liste');
+      if (myListRow) {
+        renderRows();
+      }
+    });
+    actions.appendChild(watchBtn);
+    actions.appendChild(favBtn);
+    modal.classList.add("show");
+    // Focus management
+    const firstFocusable = actions.querySelector('button') || modalClose;
+    firstFocusable && firstFocusable.focus({ preventScroll: true });
+}
 
-  modalClose.addEventListener("click", () => modal.classList.add("hide"));
-  modal.querySelector(".modal-backdrop").addEventListener("click", () => modal.classList.add("hide"));
+modalClose.addEventListener("click", () => modal.classList.remove("show"));
+modal.querySelector(".modal-backdrop").addEventListener("click", () => modal.classList.remove("show"));
+
+  // Échap pour fermer + trap basique
+  window.addEventListener('keydown', (e) => {
+    if (!modal.classList.contains('show')) return;
+    if (e.key === 'Escape') {
+      modal.classList.remove('show');
+    }
+    if (e.key === 'Tab') {
+      const focusables = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+      const f = Array.from(focusables).filter(el => !el.hasAttribute('disabled'));
+      if (f.length === 0) return;
+      const first = f[0];
+      const last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        last.focus();
+        e.preventDefault();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        first.focus();
+        e.preventDefault();
+      }
+    }
+  });
+
 
   await renderRows();
+
+  // Live search filter
+  function filterCards(query) {
+    const normalizedQuery = (query || "").toLowerCase().trim();
+    const rows = rowsContainer.querySelectorAll('.row');
+    rows.forEach(row => {
+      const cards = row.querySelectorAll('.card');
+      let visibleCount = 0;
+      cards.forEach(card => {
+        const title = card.dataset.title || '';
+        const isMatch = normalizedQuery === '' || title.includes(normalizedQuery);
+        card.style.display = isMatch ? '' : 'none';
+        if (isMatch) visibleCount++;
+      });
+      // Hide the entire row if no cards match; show otherwise
+      row.style.display = visibleCount === 0 ? 'none' : '';
+    });
+  }
+
+  if (searchInput) {
+    let debounceId;
+    searchInput.addEventListener('input', (e) => {
+      const value = e.target.value;
+      clearTimeout(debounceId);
+      debounceId = setTimeout(() => filterCards(value), 150);
+    });
+  }
 });
