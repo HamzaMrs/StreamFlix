@@ -1,12 +1,22 @@
-
 :root {
-    --primary-color: #e50914;
-    --secondary-color: #141414;
-    --background-color: #000000;
-    --text-color: #ffffff;
-    --muted-color: #aaaaaa;
-  }
-  
+  --primary-color: #e50914;
+  --secondary-color: #141414;
+  --background-color: #000000;
+  --text-color: #ffffff;
+  --muted-color: #aaaaaa;
+
+  --font-main: 'Inter', sans-serif;
+  --font-title: 'Anton', sans-serif;
+
+  --transition-speed: 0.3s;
+  --container-width: 95%;
+  --max-width: 1400px;
+
+  --font-size-base: 16px;
+  --font-size-small: 14px;
+  --font-size-large: 18px;
+}
+
   
   /* Transition fluide entre thèmes */
   body, .site-header, .card, .modal-panel {

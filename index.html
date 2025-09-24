@@ -1,105 +1,101 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>StreamFlix - Prototype</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>StreamFlix - Prototype</title>
 
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Anton&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Anton&display=swap"
+        rel="stylesheet">
 
 
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/themes.css">
-  <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/animations.css">
 </head>
+
 <body>
+    <header id="siteHeader" class="site-header" role="banner">
+        <div class="header-inner container">
+            <div class="brand" aria-hidden="false">
+                <div class="logo">STREAMFLIX</div>
+            </div>
+
+            <button class="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav class="main-nav" aria-label="Navigation principale">
+                <ul class="nav-list">
+                    <li data-section="hero" class="nav-item active">Accueil</li>
+                    <li data-section="nouveautes" class="nav-item">Nouveautés</li>
+                    <li data-section="tendances" class="nav-item">Tendances</li>
+                    <li data-section="pour-vous" class="nav-item">Pour vous</li>
+                </ul>
+                <div class="nav-indicator" aria-hidden="true"></div>
+            </nav>
+
+            <div class="header-controls">
+                <div class="search-box">
+                    <input id="searchInput" type="search" placeholder="Rechercher un titre..."
+                        aria-label="Rechercher" />
+                </div>
 
 
-  <header id="siteHeader" class="site-header" role="banner">
-    <div class="header-inner container">
-      <div class="brand" aria-hidden="false">
-        <div class="logo">STREAMFLIX</div>
-      </div>
+                <div class="color-picker-wrapper" title="Couleur secondaire">
+                    <input type="color" id="colorPicker" value="#e50914" aria-label="Couleur secondaire">
+                </div>
 
-      <button class="hamburger" aria-label="Menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-
-      <nav class="main-nav" aria-label="Navigation principale">
-        <ul class="nav-list">
-          <li data-section="home" class="nav-item active">Accueil</li>
-          <li data-section="nouvelles" class="nav-item">Nouveautés</li>
-          <li data-section="tendances" class="nav-item">Tendances</li>
-          <li data-section="pour vous" class="nav-item">Pour vous</li>
-        </ul>
-        <div class="nav-indicator" aria-hidden="true"></div>
-      </nav>
-
-      <div class="header-controls">
-        <div class="search-box">
-          <input id="searchInput" type="search" placeholder="Rechercher un titre..." aria-label="Rechercher" />
+                <button class="btn ghost">S'abonner</button>
+                <div class="profile"><img src="https://www.gravatar.com/avatar/?d=mp&s=80" alt="Profil"></div>
+            </div>
         </div>
+    </header>
 
-
-        <div class="color-picker-wrapper" title="Couleur secondaire">
-          <input type="color" id="colorPicker" value="#e50914" aria-label="Couleur secondaire">
+    <section class="hero" id="hero" role="region" aria-label="Section principale">
+        <div class="hero-layer layer-back" data-speed="0.12" aria-hidden="true"></div>
+        <div class="hero-layer layer-mid" data-speed="0.22" aria-hidden="true"></div>
+        <div class="hero-layer layer-front" data-speed="0.4" aria-hidden="true"></div>
+    
+        <div class="hero-slider"></div>
+    
+        <div class="hero-overlay">
+            <h1>Les meilleures séries et films, réunis.</h1>
+            <p>Découvre des sélections personnalisées et des nouveautés chaque semaine.</p>
+            <div class="hero-actions">
+                <button class="btn primary">Regarder maintenant</button>
+                <button class="btn outline">Ajouter à ma liste</button>
+            </div>
         </div>
+    </section>
 
-        <button class="btn ghost">S'abonner</button>
-        <div class="profile"><img src="https://www.gravatar.com/avatar/?d=mp&s=80" alt="Profil"></div>
-      </div>
+
+    <main id="mainContent" class="main" role="main">
+        <section id="rowsContainer" class="rows container" aria-live="polite"></section>
+    </main>
+
+    <div id="modal" class="modal hide" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="modal-backdrop"></div>
+        <div class="modal-panel">
+            <button class="modal-close" aria-label="Fermer">✕</button>
+            <div class="modal-body"></div>
+        </div>
     </div>
-  </header>
-
-  <section class="hero" id="hero" role="region" aria-label="Section principale">
-    <div class="hero-layer layer-back" data-speed="0.12" aria-hidden="true"></div>
-    <div class="hero-layer layer-mid" data-speed="0.22" aria-hidden="true"></div>
-    <div class="hero-layer layer-front" data-speed="0.4" aria-hidden="true"></div>
-
-    <div class="hero-content container">
-      <h1>Les meilleures séries et films, réunis.</h1>
-      <p>Découvre des sélections personnalisées et des nouveautés chaque semaine.</p>
-      <div class="hero-actions">
-        <button class="btn primary">Regarder maintenant</button>
-        <button class="btn outline">Ajouter à ma liste</button>
-      </div>
-    </div>
-  </section>
 
 
-  <main id="mainContent" class="main" role="main">
-    <section id="rowsContainer" class="rows container" aria-live="polite"></section>
-  </main>
-  
-  <div id="modal" class="modal hide" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal-backdrop"></div>
-    <div class="modal-panel">
-      <button class="modal-close" aria-label="Fermer">✕</button>
-      <div class="modal-body"></div>
-    </div>
-  </div>
+    <footer class="site-footer">
+        <div class="container">
+            <p>© StreamFlix by Hamza</p>
+        </div>
+    </footer>
 
 
-  <div id="modal" class="modal hide" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal-backdrop"></div>
-    <div class="modal-panel">
-      <button class="modal-close" aria-label="Fermer">✕</button>
-      <div class="modal-body">
-      </div>
-    </div>
-  </div>
-
-  <footer class="site-footer">
-    <div class="container">
-      <p>© StreamFlix by Hamza</p>
-    </div>
-  </footer>
-
-
-  <script src="main.js" defer></script>
+    <script src="main.js" defer></script>
 </body>
+
 </html>
