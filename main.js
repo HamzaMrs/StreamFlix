@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const modal = document.getElementById("modal");
   const modalBody = modal.querySelector(".modal-body");
   const modalClose = modal.querySelector(".modal-close");
+  const btnWatch = modal.querySelector(".btn.primary");
   const colorPicker = document.getElementById("colorPicker");
   const hamburger = document.querySelector('.hamburger');
   const mainNav = document.querySelector('.main-nav');
@@ -15,15 +16,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   const API_KEY = 'e4b90327227c88daac14c0bd0c1f93cd';
   const BASE_URL = 'https://api.themoviedb.org/3';
   const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
-  
+
   // Cache des genres
   let genresCache = null;
 
   const categories = [
-      { id: "nouveautes", endpoint: "/movie/now_playing" },
-      { id: "tendances", endpoint: "/trending/movie/week" },
-      { id: "pour-vous", endpoint: "/movie/popular" },
-      { id: "ma-liste", endpoint: null }
+    { id: "nouveautes", endpoint: "/movie/now_playing" },
+    { id: "tendances", endpoint: "/trending/movie/week" },
+    { id: "pour-vous", endpoint: "/movie/popular" },
+    { id: "ma-liste", endpoint: null }
   ];
 
   // Gestion favoris (localStorage)
@@ -211,25 +212,25 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  // Modal enrichie
   async function showModal(movie) {
     const [details, genres] = await Promise.all([
       fetchMovieDetails(movie.id),
       fetchGenres()
     ]);
-    
-    const genreNames = movie.genre_ids ? 
+
+    const genreNames = movie.genre_ids ?
       movie.genre_ids.map(id => genres.find(g => g.id === id)?.name).filter(Boolean).join(', ') : '';
-    
+
     const runtime = details?.runtime ? `${Math.floor(details.runtime / 60)}h ${details.runtime % 60}min` : '';
-    
+
+
     modalBody.innerHTML = `
         <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
         <div class="modal-body-content">
           <h2>${movie.title}</h2>
           <div class="modal-meta">
             <span class="badge">Film</span>
-            ${movie.release_date ? `<span class="badge">${String(movie.release_date).slice(0,4)}</span>` : ''}
+            ${movie.release_date ? `<span class="badge">${String(movie.release_date).slice(0, 4)}</span>` : ''}
             ${runtime ? `<span class="badge">${runtime}</span>` : ''}
             ${movie.vote_average ? `<span class="badge">★ ${Math.round(movie.vote_average * 10) / 10}</span>` : ''}
           </div>
@@ -237,40 +238,29 @@ document.addEventListener("DOMContentLoaded", async () => {
           <p>${movie.overview || 'Aucune description disponible.'}</p>
         </div>
     `;
-    // Boutons actions
-    const actions = modal.querySelector('.modal-actions');
-    actions.innerHTML = '';
-    const watchBtn = document.createElement('button');
-    watchBtn.className = 'btn primary';
-    watchBtn.textContent = 'Regarder maintenant';
-    const favBtn = document.createElement('button');
-    favBtn.className = 'btn secondary';
-    function syncFavBtn() {
-      favBtn.textContent = isFavorite(movie.id) ? 'Retirer de ma liste' : 'Ajouter à ma liste';
-    }
-    syncFavBtn();
-    favBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      toggleFavorite({ id: movie.id, title: movie.title, poster_path: movie.poster_path, overview: movie.overview });
-      syncFavBtn();
-      // Rafraîchir la rangée Ma liste si ouverte
-      const myListRow = document.getElementById('ma-liste');
-      if (myListRow) {
-        renderRows();
+
+    // Récupération du trailer TMDB
+    const resVideos = await fetch(`${BASE_URL}/movie/${movie.id}/videos?api_key=${API_KEY}&language=fr-FR`);
+    const videos = await resVideos.json();
+    const trailer = videos.results.find(v => v.type === "Trailer" && v.site === "YouTube");
+
+    // Bouton "Regarder maintenant"
+    const btnWatch = modal.querySelector(".btn.primary");
+    btnWatch.onclick = () => {
+      if (trailer) {
+        modalBody.innerHTML = `<iframe width="100%" height="400" src="https://www.youtube.com/embed/${trailer.key}" frameborder="0" allowfullscreen></iframe>`;
+      } else {
+        alert("Pas de bande-annonce disponible pour ce film.");
       }
-    });
-    actions.appendChild(watchBtn);
-    actions.appendChild(favBtn);
+    };
+
     modal.classList.add("show");
-    // Focus management
-    const firstFocusable = actions.querySelector('button') || modalClose;
-    firstFocusable && firstFocusable.focus({ preventScroll: true });
-}
+  }
 
-modalClose.addEventListener("click", () => modal.classList.remove("show"));
-modal.querySelector(".modal-backdrop").addEventListener("click", () => modal.classList.remove("show"));
 
-  // Échap pour fermer + trap basique
+  modalClose.addEventListener("click", () => modal.classList.remove("show"));
+  modal.querySelector(".modal-backdrop").addEventListener("click", () => modal.classList.remove("show"));
+
   window.addEventListener('keydown', (e) => {
     if (!modal.classList.contains('show')) return;
     if (e.key === 'Escape') {
@@ -295,7 +285,7 @@ modal.querySelector(".modal-backdrop").addEventListener("click", () => modal.cla
 
   await renderRows();
 
-  // Live search filter
+  // Recherche films
   function filterCards(query) {
     const normalizedQuery = (query || "").toLowerCase().trim();
     const rows = rowsContainer.querySelectorAll('.row');
@@ -308,7 +298,6 @@ modal.querySelector(".modal-backdrop").addEventListener("click", () => modal.cla
         card.style.display = isMatch ? '' : 'none';
         if (isMatch) visibleCount++;
       });
-      // Hide the entire row if no cards match; show otherwise
       row.style.display = visibleCount === 0 ? 'none' : '';
     });
   }
