@@ -17,8 +17,6 @@
   --font-size-large: 18px;
 }
 
-  
-  /* Transition fluide entre thèmes */
   body, .site-header, .card, .modal-panel {
     transition: background-color 0.4s, color 0.4s, border-color 0.4s;
   }

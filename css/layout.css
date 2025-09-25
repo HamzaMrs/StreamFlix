@@ -46,7 +46,6 @@
     transition: color var(--transition-speed);
 }
 
-/* Soulignement animé au survol/focus */
 .nav-item { position: relative; }
 .nav-item::after {
     content: "";
@@ -113,7 +112,6 @@
     transition: transform 0.25s ease, opacity 0.2s ease, top 0.25s ease;
 }
 
-/* Animation hamburger -> croix */
 .hamburger.active span:nth-child(1) {
     transform: translateY(8.5px) rotate(45deg);
 }
@@ -124,7 +122,6 @@
     transform: translateY(-8.5px) rotate(-45deg);
 }
 
-/* Navbar compacte */
 .main-nav {
     flex: 1;
     margin-left: 1rem;
@@ -210,7 +207,6 @@
     margin-bottom: 1.25rem;
 }
 
-/* plus de translation, crossfade géré dans animations.css */
 
 .hero-layer {
     position: absolute;
@@ -326,7 +322,6 @@
     opacity: 1;
 }
 
-/* Staggered animation */
 .staggered {
     opacity: 0;
     transform: translateY(20px);
@@ -394,7 +389,7 @@
     background: transparent;
     color: #fff;
     border: none;
-    font-size: 1.8rem;
+    font-size: 24px;
     cursor: pointer;
     transition: color 0.2s ease;
 }
@@ -659,15 +654,14 @@
     }
 
     .logo {
-        font-size: 2rem; /* logo plus grand */
+        font-size: 2rem; 
     }
 
     .hamburger {
         display: flex;
-        margin-left: auto; /* pousse à droite */
+        margin-left: auto; 
     }
 
-    /* Navigation en plein écran */
     .main-nav {
         position: fixed;
         inset: 0;
@@ -698,7 +692,6 @@
         text-align: center;
     }
 
-    /* Recherche + profil compactés */
     .header-controls {
         display: flex;
         gap: 0.6rem;
@@ -706,7 +699,7 @@
     }
 
     .search-box input {
-        width: 100px; /* réduit */
+        width: 100px;
     }
 
     .profile img {
@@ -714,17 +707,14 @@
         height: 32px;
     }
 
-    /* Hero */
     .hero {
         height: 60vh;
     }
 
-    /* Cards */
     .card {
         min-width: 140px;
     }
 
-    /* Modal */
     .modal-body {
         flex-direction: column;
         align-items: center;
