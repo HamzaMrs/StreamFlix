@@ -47,8 +47,29 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Hamburger menu
   hamburger.addEventListener('click', () => {
-    mainNav.classList.toggle('active');
-    hamburger.classList.toggle('active');
+    const isActive = mainNav.classList.toggle('active');
+    hamburger.classList.toggle('active', isActive);
+    document.body.classList.toggle('no-scroll', isActive);
+  });
+
+  // Fermer le menu au clic sur un item
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', () => {
+      if (mainNav.classList.contains('active')) {
+        mainNav.classList.remove('active');
+        hamburger.classList.remove('active');
+        document.body.classList.remove('no-scroll');
+      }
+    });
+  });
+
+  // Fermer le menu au resize au-delà du mobile
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 600 && mainNav.classList.contains('active')) {
+      mainNav.classList.remove('active');
+      hamburger.classList.remove('active');
+      document.body.classList.remove('no-scroll');
+    }
   });
 
   // Couleur primaire
